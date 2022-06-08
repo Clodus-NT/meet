@@ -17,3 +17,9 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
+  getAccessToken:
+    handler: handler.getAccessToken
+    events:
+      - https:
+        path: api/token/{code}
+        method: get
