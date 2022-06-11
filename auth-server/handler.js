@@ -57,8 +57,7 @@ module.exports.getAuthURL = async () => {
   return {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
+      "Access-Control-Allow-Origin": "*"
     },
     body: JSON.stringify({
       authUrl: authUrl,
@@ -74,12 +73,15 @@ module.exports.getAccessToken = async (event) => {
     redirect_uris[0]
   );
   //Decode auth code axtracted from URL query
+  // const code = decodeURIComponent(`${event.pathParameters.access_token}`);
   const code = decodeURIComponent(`${event.pathParameters.code}`);
-
+  console.log(code);
+  
   return new Promise((resolve, reject) => {
     //Exchange auth code for access token with callback after exchange
     //The callback is an arrow function witht he results as parameters: 'err' and 'token'
     oAuth2Client.getToken(code, (err, token) => {
+      console.log('I am working');
       if (err) {
         return reject(err);
       }
@@ -87,12 +89,12 @@ module.exports.getAccessToken = async (event) => {
     });
   })
   .then((token) => {
+    console.log('I am also working')
     //Respond with OAuth token
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
+        "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify(token),
     };
