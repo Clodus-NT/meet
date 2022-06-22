@@ -11,7 +11,7 @@ export const extractLocations = (events) => {
   return locations;
 }
 
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -55,7 +55,10 @@ const removeQuery = () => {
       window.location.pathname;
     window.history.pushState("", "", newurl);
   } else {
-    newurl = window.location.protocol + "//" + window.location.host;
+    newurl = 
+      window.location.protocol + 
+      "//" + 
+      window.location.host;
     window.history.pushState("", "", newurl);
   }
 };
