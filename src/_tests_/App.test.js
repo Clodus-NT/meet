@@ -7,7 +7,6 @@ import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import NumberOfEvents from '../NumberOfEvents';
-import { getEventListeners } from 'events';
 
 //Unit Testing (shallow)
 describe('<App /> component', () => {
