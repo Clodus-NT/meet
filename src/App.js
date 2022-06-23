@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
+import { extractLocations, getEvents } from './api';
 
 import EventList from './EventList';
 import CitySearch from './CitySearch';
@@ -16,18 +16,12 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = checkToken(accessToken).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-
-    if ((code || isTokenValid) && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
-        }
-      });
-    }
+    getEvents().then((events) => {
+      console.log('didMount,', events);
+      if (this.mounted) {
+        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
+      }
+    });
   }
 
   componentWillUnmount() {

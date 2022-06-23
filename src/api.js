@@ -30,7 +30,7 @@ export const getEvents = async () => {
   }
 
   const token = await getAccessToken();
-
+  console.log('getEvents token', token);
   if (token) {
     removeQuery();
     const getEventsUrl = 'https://kjbdbrihvd.execute-api.eu-central-1.amazonaws.com/dev/api/get-events';
