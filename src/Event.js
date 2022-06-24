@@ -28,7 +28,12 @@ class Event extends Component {
               @{summary} | {location}
             </p>
           )}
-          {showDetails && (
+          <button 
+            className='details-btn' 
+            onClick={() => this.setState({showDetails: !showDetails})}>
+              { showDetails ? 'Hide' : 'Show'} Details
+          </button>
+          {/* {showDetails && (
             <button
               className="details-btn"
               onClick={() => this.setState({ showDetails: !showDetails })}
@@ -44,7 +49,7 @@ class Event extends Component {
             >
               show details
             </button>
-          )}
+          )} */}
         </div>
         {showDetails && (
           <div className="event__Details">
