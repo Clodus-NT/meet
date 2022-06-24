@@ -38,22 +38,17 @@ defineFeature(feature, test => {
 
   //Scenario 3
   test('When the user clicks on an expanded event element, the element should collapse.', ({ given, when, then }) => {
-    given('an event element is expanded', () => {
-      const detailsBtn = AppWrapper.find('.details-btn');
-      const eventDetails = AppWrapper.find('.event__Details');
-      AppWrapper = mount(<App />);
+    given('an event element is expanded', async () => {
+      AppWrapper = await mount(<App />);
       AppWrapper.update();
-      detailsBtn.at(0).simulate('click');
-      expect(eventDetails).toHaveLength(1);
+      AppWrapper.find('.details-btn').at(0).simulate('click');
+      expect(AppWrapper.find('.event__Details')).toHaveLength(1);
     });
     when('the user clicks on an event', () => {
-      AppWrapper.update();
       AppWrapper.find('.details-btn').at(0).simulate('click');
     });
     then('the event element should collapse.', () => {
-      // const eventDetails = AppWrapper.find('.event__Details');
-      // expect(eventDetails).toHaveLength(0);
-      // expect(AppWrapper.find('.event__Details')).toHaveLength(0);
+      expect(AppWrapper.find('.event__Details')).toHaveLength(0);
     });
   });
 });
