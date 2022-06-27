@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import { extractLocations, getEvents } from './api';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import WelcomeScreen from './WelcomeScreen';
+import { OfflineAlert } from './Alert';
 
 class App extends Component {
   state = {
@@ -12,15 +14,35 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     locationSelected: 'all',
+    showWelcomeScreen: undefined,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
-      }
-    });
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const code = searchParams.get('code');
+    this.setState({ showWelcomeScreen: !(code || isTokenValid)})
+
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
+        }
+      });
+    }
+
+    if (!navigator.onLine) {
+      this.setState({
+        offlineText: 'You\'re offline. Data has been loaded from the cache'
+      });
+    } else {
+      this.setState({
+        offlineText: ''
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -63,7 +85,9 @@ class App extends Component {
   }
 
   render() {
-    const { locations, events, numberOfEvents } = this.state;
+    if (this.state.showWelcomeScreen === undefined) return <div className='App' />
+
+    const { locations, events, numberOfEvents, offlineText } = this.state;
     return (
       <div className="App">
         <h1>Meet App</h1>
@@ -78,6 +102,11 @@ class App extends Component {
         />
         <EventList 
           events={events} 
+        />
+        <OfflineAlert text={offlineText} />
+        <WelcomeScreen 
+          showWelcomeScreen={this.state.showWelcomeScreen} 
+          getAccessToken={()=> { getAccessToken() }} 
         />
       </div>
     )
