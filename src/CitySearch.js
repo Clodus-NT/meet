@@ -17,13 +17,14 @@ class CitySearch extends Component {
     if (suggestions.length === 0) {
       this.setState({
         query: value,
-        infoText: 'We cannot find the city you\'re looking for. Try searching for another city.'
+        infoText: 'Oops! Try another city.'
       });
     } else {
       return this.setState({
         query: value,
-        suggestions: [],
-        showSuggestions: false,
+        suggestions,
+        // suggestions: [],
+        // showSuggestions: false,
         infoText: '',
       });
     }
@@ -32,7 +33,8 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      showSuggestions: false,
+      infoText: '',
     });
   
     this.props.updateEvents(suggestion);
