@@ -23,6 +23,7 @@ class Alert extends Component {
   }
 }
 
+//Search Query Alert
 class InfoAlert extends Alert {
   constructor(props) {
     super(props);
