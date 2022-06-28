@@ -77,20 +77,7 @@ class App extends Component {
   render() {
     const { locations, events, numberOfEvents, offlineText, showWelcomeScreen } = this.state;
 
-    if (showWelcomeScreen === undefined) return <div className='App' />
-
-    if (!navigator.onLine) {
-      this.setState({
-        offlineText: 'You\'re offline. Data has been loaded from the cache'
-      });
-      console.log('offline text', this.state.offlineText);
-      console.log('navigator offline', navigator);
-    } else {
-      this.setState({
-        offlineText: ''
-      });
-    }
-    
+    // if (showWelcomeScreen === undefined) return <div className='App' />
 
     return (
       <div className="App">
@@ -108,10 +95,10 @@ class App extends Component {
         <EventList 
           events={events} 
         />
-        <WelcomeScreen 
+        {/* <WelcomeScreen 
           showWelcomeScreen={showWelcomeScreen} 
           getAccessToken={()=> { getAccessToken() }} 
-        />
+        /> */}
       </div>
     )
   }
