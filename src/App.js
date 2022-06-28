@@ -33,12 +33,13 @@ class App extends Component {
         }
       });
     }
-
+    console.log('navigator/ didMount()', navigator);
     if (!navigator.onLine) {
       this.setState({
         offlineText: 'You\'re offline. Data has been loaded from the cache'
       });
-      console.log('offline text', this.state.offlineText)
+      console.log('offline text', this.state.offlineText);
+      console.log('navigator offline', navigator);
     } else {
       this.setState({
         offlineText: ''
