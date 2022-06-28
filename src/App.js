@@ -6,7 +6,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import WelcomeScreen from './WelcomeScreen';
-// import { OfflineAlert } from './Alert';
+import { OfflineAlert } from './Alert';
 
 class App extends Component {
   state = {
@@ -34,16 +34,16 @@ class App extends Component {
       });
     }
 
-    // if (!navigator.onLine) {
-    //   this.setState({
-    //     offlineText: 'You\'re offline. Data has been loaded from the cache'
-    //   });
-    //   console.log('offline text', this.state.offlineText)
-    // } else {
-    //   this.setState({
-    //     offlineText: ''
-    //   });
-    // }
+    if (!navigator.onLine) {
+      this.setState({
+        offlineText: 'You\'re offline. Data has been loaded from the cache'
+      });
+      console.log('offline text', this.state.offlineText)
+    } else {
+      this.setState({
+        offlineText: ''
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -94,7 +94,7 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
-        {/* <OfflineAlert text={offlineText} /> */}
+        <OfflineAlert text={offlineText} />
         <CitySearch 
           locations={locations}
           updateEvents={this.updateEvents}
