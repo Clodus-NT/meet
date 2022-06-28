@@ -17,37 +17,6 @@ class App extends Component {
     showWelcomeScreen: undefined,
   }
 
-  // async componentDidMount() {
-  //   this.mounted = true;
-  //   const accessToken = localStorage.getItem('access_token');
-  //   const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-  //   const searchParams = new URLSearchParams(window.location.search);
-
-  //   const code = searchParams.get('code');
-  //   this.setState({ showWelcomeScreen: !(code || isTokenValid)})
-
-  //   if ((code || isTokenValid) && this.mounted) {
-  //     getEvents().then((events) => {
-  //       if (this.mounted) {
-  //         this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
-  //       }
-  //     });
-  //   }
-
-  //   console.log('navigator/ didMount()', navigator);
-  //   if (!navigator.onLine) {
-  //     this.setState({
-  //       offlineText: 'You\'re offline. Data has been loaded from the cache'
-  //     });
-  //     console.log('offline text', this.state.offlineText);
-  //     console.log('navigator offline', navigator);
-  //   } else {
-  //     this.setState({
-  //       offlineText: ''
-  //     });
-  //   }
-  // }
-  
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {

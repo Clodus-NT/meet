@@ -33,23 +33,6 @@ class Event extends Component {
             onClick={() => this.setState({showDetails: !showDetails})}>
               { showDetails ? 'Hide' : 'Show'} Details
           </button>
-          {/* {showDetails && (
-            <button
-              className="details-btn"
-              onClick={() => this.setState({ showDetails: !showDetails })}
-            >
-              hide details
-            </button>
-          )}
-          
-          {!showDetails && (
-            <button
-              className="details-btn"
-              onClick={() => this.setState({ showDetails: !showDetails })}
-            >
-              show details
-            </button>
-          )} */}
         </div>
         {showDetails && (
           <div className="event__Details">
@@ -69,22 +52,5 @@ class Event extends Component {
     );
   }
 }
-  // render() {
-  //   const { event } = this.props;
-
-  //   return (
-  //     <div>
-  //       <h2 className="summary">{event.summary}</h2>
-  //       <p className="start-date">
-  //         {event.start.dateTime} ({event.start.timeZone})
-  //       </p>
-  //       <p className="location">
-  //         @{event.summary} | {event.location}
-  //       </p>
-  //       <button className="details-btn">Show Details</button>
-  //     </div>
-  //   )
-  // }
-
 
 export default Event;
