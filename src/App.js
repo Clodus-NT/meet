@@ -27,14 +27,15 @@ class App extends Component {
     this.setState({ showWelcomeScreen: !(code || isTokenValid)})
     console.log('am i mounted', this.mounted);
 
+    if (!navigator.onLine) {
+      console.log('i am aware that i am offline');
+      console.log('is token valid', isTokenValid);
+    }
+    
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
-        }
-        if (!navigator.onLine) {
-          console.log('i am aware that i am offline');
-          console.log('is token valid', isTokenValid);
         }
         // if (!navigator.onLine) {
         //   this.setState({
