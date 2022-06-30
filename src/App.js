@@ -31,22 +31,22 @@ class App extends Component {
       console.log('i am aware that i am offline');
       console.log('is token valid', isTokenValid);
     }
-    
+
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
         }
-        // if (!navigator.onLine) {
-        //   this.setState({
-        //     OfflineAlertText: 'You are offline'
-        //   });
-        //   console.log('navigator/ didMount()', navigator);
-        // } else {
-        //   this.setState({
-        //     OfflineAlertText: ''
-        //   });
-        // }
+      });
+    }
+
+    if (!navigator.onLine) {
+      this.setState({
+        OfflineAlertText: 'You are offline'
+      });
+    } else {
+      this.setState({
+        OfflineAlertText: ''
       });
     }
     console.log('navigator/ didMount()', navigator);
@@ -117,7 +117,7 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
-        {/* <OfflineAlert text={offlineText} /> */}
+        <OfflineAlert text={offlineText} />
         <CitySearch 
           locations={locations}
           updateEvents={this.updateEvents}
