@@ -134,7 +134,8 @@ input[type="number"] {
 }
 
 .offline-alert {
-  position: fixed;
+  display: flex;
+  text-align: center;
   top: 20px;
 }
 
