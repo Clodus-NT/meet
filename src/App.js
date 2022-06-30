@@ -67,7 +67,7 @@ class App extends Component {
         numberOfEvents: parseInt(eventCount),
         locationSelected: location,
       });
-      console.log('eventCount', eventCount, eventCount + 1);
+      // console.log('eventCount', eventCount, eventCount + 1);
     });
   }
 
