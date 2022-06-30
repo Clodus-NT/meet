@@ -90,7 +90,7 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
-        { !navigator.onLine && <OfflineAlert className="text-center" text={"You are offline"} />}
+        { !navigator.onLine && <OfflineAlert text={"You are offline"} />}
         {/* <OfflineAlert text={offlineText} /> */}
         <CitySearch 
           locations={locations}
