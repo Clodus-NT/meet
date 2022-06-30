@@ -39,35 +39,8 @@ class App extends Component {
         }
       });
     }
-
-    if (!navigator.onLine) {
-      this.setState({
-        OfflineAlertText: 'You are offline'
-      });
-    } else {
-      this.setState({
-        OfflineAlertText: ''
-      });
-    }
     console.log('navigator/ didMount()', navigator);
   }
-  // componentDidMount() {
-  //   this.mounted = true;
-  //   getEvents().then((events) => {
-  //     if (this.mounted) {
-  //     this.setState({ events, locations: extractLocations(events) });
-  //     }
-  //     if (!navigator.onLine) {
-  //       this.setState({
-  //         OfflineAlertText: 'You are offline'
-  //       });
-  //     } else {
-  //       this.setState({
-  //         OfflineAlertText: ''
-  //       });
-  //     }
-  //   });
-  // };
 
   componentWillUnmount() {
     this.mounted = false;
@@ -109,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    const { locations, events, numberOfEvents, offlineText, showWelcomeScreen } = this.state;
+    const { locations, events, numberOfEvents, showWelcomeScreen } = this.state;
 
     if (showWelcomeScreen === undefined) return <div className='App' />
 
@@ -117,7 +90,8 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
-        <OfflineAlert text={offlineText} />
+        { !navigator.onLine && <OfflineAlert className="text-center" text={"You are offline"} />}
+        {/* <OfflineAlert text={offlineText} /> */}
         <CitySearch 
           locations={locations}
           updateEvents={this.updateEvents}
