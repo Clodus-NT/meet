@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 import EventList from './EventList';
 import CitySearch from './CitySearch';
@@ -12,7 +13,7 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32,
+    numberOfEvents: 16,
     locationSelected: 'all',
     showWelcomeScreen: undefined,
   }
@@ -90,8 +91,7 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
-        { !navigator.onLine && <OfflineAlert text={"You are offline"} />}
-        {/* <OfflineAlert text={offlineText} /> */}
+        { !navigator.onLine && <OfflineAlert className='offline-alert' text={"You are offline"} />}
         <CitySearch 
           locations={locations}
           updateEvents={this.updateEvents}
@@ -103,6 +103,17 @@ class App extends Component {
         <EventList 
           events={events} 
         />
+        <ScatterChart 
+          width={400}
+          height={800}
+          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+        >
+          <CartesianGrid />
+          <XAxis type="category" dataKey="city" name="city" />
+          <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Scatter data={this.getData()} fill="#8884d8" />
+        </ScatterChart>
         <WelcomeScreen 
           showWelcomeScreen={showWelcomeScreen} 
           getAccessToken={()=> { getAccessToken() }} 
