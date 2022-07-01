@@ -100,12 +100,9 @@ class App extends Component {
           updateEvents={ this.updateEvents }
           numberOfEvents={ numberOfEvents }
         />
-        <EventList 
-          events={events} 
-        />
         <ScatterChart 
-          width={400}
-          height={800}
+          width={800}
+          height={400}
           margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         >
           <CartesianGrid />
@@ -114,6 +111,9 @@ class App extends Component {
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Scatter data={this.getData()} fill="#8884d8" />
         </ScatterChart>
+        <EventList 
+          events={events} 
+        />
         <WelcomeScreen 
           showWelcomeScreen={showWelcomeScreen} 
           getAccessToken={()=> { getAccessToken() }} 
