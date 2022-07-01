@@ -7,7 +7,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import WelcomeScreen from './WelcomeScreen';
-import EventGenre from '.EventGenre';
+import EventGenre from './EventGenre';
 import { OfflineAlert } from './Alert';
 
 class App extends Component {
