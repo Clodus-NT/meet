@@ -16,7 +16,7 @@ class App extends Component {
     locations: [],
     numberOfEvents: 16,
     locationSelected: 'all',
-    showWelcomeScreen: undefined,
+    showWelcomeScreen: true,
   }
 
   async componentDidMount() {
@@ -26,22 +26,29 @@ class App extends Component {
     const searchParams = new URLSearchParams(window.location.search);
 
     const code = searchParams.get('code');
-    this.setState({ showWelcomeScreen: !(code || isTokenValid)})
-    console.log('am i mounted', this.mounted);
 
-    if (!navigator.onLine) {
-      console.log('i am aware that i am offline');
-      console.log('is token valid', isTokenValid);
-    }
+    // this.setState({ showWelcomeScreen: !(code || isTokenValid)})
+
+    // console.log('am i mounted', this.mounted);
+
+    // if (!navigator.onLine) {
+    //   console.log('i am aware that i am offline');
+    //   console.log('is token valid', isTokenValid);
+    // }
 
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events), });
+          this.setState({ 
+            events: events.slice(0, this.state.numberOfEvents), 
+            locations: extractLocations(events), 
+            showWelcomeScreen: false,
+        });
         }
       });
     }
-    console.log('navigator/ didMount()', navigator);
+
+    // console.log('navigator/ didMount()', navigator);
   }
 
   componentWillUnmount() {

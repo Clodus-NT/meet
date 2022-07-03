@@ -133,12 +133,6 @@ input[type="number"] {
   top: 20px;
 }
 
-.offline-alert {
-  display: flex;
-  text-align: center;
-  top: 20px;
-}
-
 .data-vis-wrapper {
   display: flex;
   align-items: center;
