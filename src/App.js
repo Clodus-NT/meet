@@ -27,15 +27,6 @@ class App extends Component {
 
     const code = searchParams.get('code');
 
-    // this.setState({ showWelcomeScreen: !(code || isTokenValid)})
-
-    // console.log('am i mounted', this.mounted);
-
-    // if (!navigator.onLine) {
-    //   console.log('i am aware that i am offline');
-    //   console.log('is token valid', isTokenValid);
-    // }
-
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
@@ -47,8 +38,6 @@ class App extends Component {
         }
       });
     }
-
-    // console.log('navigator/ didMount()', navigator);
   }
 
   componentWillUnmount() {
@@ -76,7 +65,6 @@ class App extends Component {
         numberOfEvents: parseInt(eventCount),
         locationSelected: location,
       });
-      // console.log('eventCount', eventCount, eventCount + 1);
     });
   }
 
